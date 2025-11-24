@@ -16,12 +16,12 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
 
   const { auth } = usePuterStore();
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!auth.isAuthenticated) {
       // user is not authenticated then redirect to auth page
-      nagivate("/auth?next=/");
+      navigate("/auth?next=/");
     }
   }, [auth.isAuthenticated]);
     
