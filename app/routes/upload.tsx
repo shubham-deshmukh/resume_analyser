@@ -39,8 +39,6 @@ const Upload = () => {
     setStatusText("Converting PDF to image ...");
     const imageFile = await convertPdfToImage(file);
 
-    console.log(imageFile);
-
     if (!imageFile.file)
       return setStatusText("Error: Failed to convert the PDF to image.");
 
@@ -75,10 +73,9 @@ const Upload = () => {
     const feedbackText =
       typeof feedback.message.content === "string"
         ? feedback.message.content
-        : feedback.message.content[0];
+        : feedback.message.content[0].text;
     
-    // data.feedback = JSON.parse(feedbackText);
-    data.feedback = feedbackText;
+    data.feedback = JSON.parse(feedbackText);
     await kv.set(`resume:${uuid}`, JSON.stringify(data));
 
     setStatusText('Analysis is completed, redirecting ...');
