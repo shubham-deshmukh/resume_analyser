@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import Navbar from "~/components/Navbar";
 import FileUploader from "~/components/FileUploader";
 import { usePuterStore } from "~/lib/puter";
@@ -15,6 +15,13 @@ const Upload = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!auth.isAuthenticated) {
+      // user is not authenticated then redirect to auth page
+      navigate("/auth?next=/upload");
+    }
+  }, [auth.isAuthenticated]);
+  
   const handleFileSelect = (file: File | null) => {
     setFile(file);
   };
